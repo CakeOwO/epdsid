@@ -44,9 +44,9 @@ class TestesStub(object):
                 request_serializer=epdsid__pb2.Long.SerializeToString,
                 response_deserializer=epdsid__pb2.Long.FromString,
                 _registered_method=True)
-        self.SomaOitoLong = channel.unary_unary(
-                '/Testes/SomaOitoLong',
-                request_serializer=epdsid__pb2.OitoLong.SerializeToString,
+        self.SomaListaLong = channel.unary_unary(
+                '/Testes/SomaListaLong',
+                request_serializer=epdsid__pb2.ListaLong.SerializeToString,
                 response_deserializer=epdsid__pb2.Long.FromString,
                 _registered_method=True)
         self.InverteString = channel.unary_unary(
@@ -54,10 +54,30 @@ class TestesStub(object):
                 request_serializer=epdsid__pb2.String.SerializeToString,
                 response_deserializer=epdsid__pb2.String.FromString,
                 _registered_method=True)
-        self.ChamadaComplexo = channel.unary_unary(
-                '/Testes/ChamadaComplexo',
-                request_serializer=epdsid__pb2.SolicitacaoComplexo.SerializeToString,
-                response_deserializer=epdsid__pb2.RespostaComplexo.FromString,
+        self.AdicionaContato = channel.unary_unary(
+                '/Testes/AdicionaContato',
+                request_serializer=epdsid__pb2.Contato.SerializeToString,
+                response_deserializer=epdsid__pb2.StatusTransacao.FromString,
+                _registered_method=True)
+        self.PegaContato = channel.unary_unary(
+                '/Testes/PegaContato',
+                request_serializer=epdsid__pb2.ContatoId.SerializeToString,
+                response_deserializer=epdsid__pb2.Contato.FromString,
+                _registered_method=True)
+        self.RemoveContato = channel.unary_unary(
+                '/Testes/RemoveContato',
+                request_serializer=epdsid__pb2.ContatoId.SerializeToString,
+                response_deserializer=epdsid__pb2.StatusTransacao.FromString,
+                _registered_method=True)
+        self.AtualizaContato = channel.unary_unary(
+                '/Testes/AtualizaContato',
+                request_serializer=epdsid__pb2.Contato.SerializeToString,
+                response_deserializer=epdsid__pb2.StatusTransacao.FromString,
+                _registered_method=True)
+        self.ListaContatos = channel.unary_unary(
+                '/Testes/ListaContatos',
+                request_serializer=epdsid__pb2.Vazio.SerializeToString,
+                response_deserializer=epdsid__pb2.Contatos.FromString,
                 _registered_method=True)
 
 
@@ -76,7 +96,7 @@ class TestesServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def SomaOitoLong(self, request, context):
+    def SomaListaLong(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -88,7 +108,31 @@ class TestesServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ChamadaComplexo(self, request, context):
+    def AdicionaContato(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PegaContato(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RemoveContato(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def AtualizaContato(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListaContatos(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -107,9 +151,9 @@ def add_TestesServicer_to_server(servicer, server):
                     request_deserializer=epdsid__pb2.Long.FromString,
                     response_serializer=epdsid__pb2.Long.SerializeToString,
             ),
-            'SomaOitoLong': grpc.unary_unary_rpc_method_handler(
-                    servicer.SomaOitoLong,
-                    request_deserializer=epdsid__pb2.OitoLong.FromString,
+            'SomaListaLong': grpc.unary_unary_rpc_method_handler(
+                    servicer.SomaListaLong,
+                    request_deserializer=epdsid__pb2.ListaLong.FromString,
                     response_serializer=epdsid__pb2.Long.SerializeToString,
             ),
             'InverteString': grpc.unary_unary_rpc_method_handler(
@@ -117,10 +161,30 @@ def add_TestesServicer_to_server(servicer, server):
                     request_deserializer=epdsid__pb2.String.FromString,
                     response_serializer=epdsid__pb2.String.SerializeToString,
             ),
-            'ChamadaComplexo': grpc.unary_unary_rpc_method_handler(
-                    servicer.ChamadaComplexo,
-                    request_deserializer=epdsid__pb2.SolicitacaoComplexo.FromString,
-                    response_serializer=epdsid__pb2.RespostaComplexo.SerializeToString,
+            'AdicionaContato': grpc.unary_unary_rpc_method_handler(
+                    servicer.AdicionaContato,
+                    request_deserializer=epdsid__pb2.Contato.FromString,
+                    response_serializer=epdsid__pb2.StatusTransacao.SerializeToString,
+            ),
+            'PegaContato': grpc.unary_unary_rpc_method_handler(
+                    servicer.PegaContato,
+                    request_deserializer=epdsid__pb2.ContatoId.FromString,
+                    response_serializer=epdsid__pb2.Contato.SerializeToString,
+            ),
+            'RemoveContato': grpc.unary_unary_rpc_method_handler(
+                    servicer.RemoveContato,
+                    request_deserializer=epdsid__pb2.ContatoId.FromString,
+                    response_serializer=epdsid__pb2.StatusTransacao.SerializeToString,
+            ),
+            'AtualizaContato': grpc.unary_unary_rpc_method_handler(
+                    servicer.AtualizaContato,
+                    request_deserializer=epdsid__pb2.Contato.FromString,
+                    response_serializer=epdsid__pb2.StatusTransacao.SerializeToString,
+            ),
+            'ListaContatos': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListaContatos,
+                    request_deserializer=epdsid__pb2.Vazio.FromString,
+                    response_serializer=epdsid__pb2.Contatos.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -188,7 +252,7 @@ class Testes(object):
             _registered_method=True)
 
     @staticmethod
-    def SomaOitoLong(request,
+    def SomaListaLong(request,
             target,
             options=(),
             channel_credentials=None,
@@ -201,8 +265,8 @@ class Testes(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/Testes/SomaOitoLong',
-            epdsid__pb2.OitoLong.SerializeToString,
+            '/Testes/SomaListaLong',
+            epdsid__pb2.ListaLong.SerializeToString,
             epdsid__pb2.Long.FromString,
             options,
             channel_credentials,
@@ -242,7 +306,7 @@ class Testes(object):
             _registered_method=True)
 
     @staticmethod
-    def ChamadaComplexo(request,
+    def AdicionaContato(request,
             target,
             options=(),
             channel_credentials=None,
@@ -255,9 +319,117 @@ class Testes(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/Testes/ChamadaComplexo',
-            epdsid__pb2.SolicitacaoComplexo.SerializeToString,
-            epdsid__pb2.RespostaComplexo.FromString,
+            '/Testes/AdicionaContato',
+            epdsid__pb2.Contato.SerializeToString,
+            epdsid__pb2.StatusTransacao.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def PegaContato(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/Testes/PegaContato',
+            epdsid__pb2.ContatoId.SerializeToString,
+            epdsid__pb2.Contato.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RemoveContato(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/Testes/RemoveContato',
+            epdsid__pb2.ContatoId.SerializeToString,
+            epdsid__pb2.StatusTransacao.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def AtualizaContato(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/Testes/AtualizaContato',
+            epdsid__pb2.Contato.SerializeToString,
+            epdsid__pb2.StatusTransacao.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListaContatos(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/Testes/ListaContatos',
+            epdsid__pb2.Vazio.SerializeToString,
+            epdsid__pb2.Contatos.FromString,
             options,
             channel_credentials,
             insecure,

@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0c\x65pdsid.proto\"\x07\n\x05Vazio\"\x15\n\x04Long\x12\r\n\x05valor\x18\x01 \x01(\x03\"b\n\x08OitoLong\x12\t\n\x01\x61\x18\x01 \x01(\x03\x12\t\n\x01\x62\x18\x02 \x01(\x03\x12\t\n\x01\x63\x18\x03 \x01(\x03\x12\t\n\x01\x64\x18\x04 \x01(\x03\x12\t\n\x01\x65\x18\x05 \x01(\x03\x12\t\n\x01\x66\x18\x06 \x01(\x03\x12\t\n\x01g\x18\x07 \x01(\x03\x12\t\n\x01h\x18\x08 \x01(\x03\"\x17\n\x06String\x12\r\n\x05texto\x18\x01 \x01(\t\"=\n\x13SolicitacaoComplexo\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x0c\n\x04nome\x18\x02 \x01(\t\x12\x0c\n\x04tags\x18\x03 \x03(\t\"\"\n\x10RespostaComplexo\x12\x0e\n\x06status\x18\x01 \x01(\t2\xcc\x01\n\x06Testes\x12\x1e\n\x0c\x43hamadaVazio\x12\x06.Vazio\x1a\x06.Vazio\x12!\n\x11ValorAbsolutoLong\x12\x05.Long\x1a\x05.Long\x12 \n\x0cSomaOitoLong\x12\t.OitoLong\x1a\x05.Long\x12!\n\rInverteString\x12\x07.String\x1a\x07.String\x12:\n\x0f\x43hamadaComplexo\x12\x14.SolicitacaoComplexo\x1a\x11.RespostaComplexob\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0c\x65pdsid.proto\"\x07\n\x05Vazio\"\x15\n\x04Long\x12\r\n\x05valor\x18\x01 \x01(\x03\"\x1c\n\tListaLong\x12\x0f\n\x07valores\x18\x01 \x03(\x03\"\x17\n\x06String\x12\r\n\x05texto\x18\x01 \x01(\t\"\xe9\x01\n\x07\x43ontato\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x0c\n\x04nome\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\x10\n\x08telefone\x18\x04 \x01(\t\x12\x0f\n\x07rotulos\x18\x05 \x03(\t\x12#\n\x08\x65ndereco\x18\x06 \x01(\x0b\x32\x11.Contato.Endereco\x12\x10\n\x08\x66\x61vorito\x18\x07 \x01(\x08\x1a[\n\x08\x45ndereco\x12\x14\n\x0cnomeendereco\x18\x01 \x01(\t\x12\x0e\n\x06\x63idade\x18\x02 \x01(\t\x12\x0e\n\x06\x65stado\x18\x03 \x01(\t\x12\x0b\n\x03\x63\x65p\x18\x04 \x01(\t\x12\x0c\n\x04pais\x18\x05 \x01(\t\"4\n\x0fStatusTransacao\x12\x0e\n\x06status\x18\x01 \x01(\x08\x12\x11\n\tmsgstatus\x18\x02 \x01(\t\"\x17\n\tContatoId\x12\n\n\x02id\x18\x01 \x01(\x03\"&\n\x08\x43ontatos\x12\x1a\n\x08\x63ontatos\x18\x01 \x03(\x0b\x32\x08.Contato2\xe8\x02\n\x06Testes\x12\x1e\n\x0c\x43hamadaVazio\x12\x06.Vazio\x1a\x06.Vazio\x12!\n\x11ValorAbsolutoLong\x12\x05.Long\x1a\x05.Long\x12\"\n\rSomaListaLong\x12\n.ListaLong\x1a\x05.Long\x12!\n\rInverteString\x12\x07.String\x1a\x07.String\x12-\n\x0f\x41\x64icionaContato\x12\x08.Contato\x1a\x10.StatusTransacao\x12#\n\x0bPegaContato\x12\n.ContatoId\x1a\x08.Contato\x12-\n\rRemoveContato\x12\n.ContatoId\x1a\x10.StatusTransacao\x12-\n\x0f\x41tualizaContato\x12\x08.Contato\x1a\x10.StatusTransacao\x12\"\n\rListaContatos\x12\x06.Vazio\x1a\t.Contatosb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -35,14 +35,20 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_VAZIO']._serialized_end=23
   _globals['_LONG']._serialized_start=25
   _globals['_LONG']._serialized_end=46
-  _globals['_OITOLONG']._serialized_start=48
-  _globals['_OITOLONG']._serialized_end=146
-  _globals['_STRING']._serialized_start=148
-  _globals['_STRING']._serialized_end=171
-  _globals['_SOLICITACAOCOMPLEXO']._serialized_start=173
-  _globals['_SOLICITACAOCOMPLEXO']._serialized_end=234
-  _globals['_RESPOSTACOMPLEXO']._serialized_start=236
-  _globals['_RESPOSTACOMPLEXO']._serialized_end=270
-  _globals['_TESTES']._serialized_start=273
-  _globals['_TESTES']._serialized_end=477
+  _globals['_LISTALONG']._serialized_start=48
+  _globals['_LISTALONG']._serialized_end=76
+  _globals['_STRING']._serialized_start=78
+  _globals['_STRING']._serialized_end=101
+  _globals['_CONTATO']._serialized_start=104
+  _globals['_CONTATO']._serialized_end=337
+  _globals['_CONTATO_ENDERECO']._serialized_start=246
+  _globals['_CONTATO_ENDERECO']._serialized_end=337
+  _globals['_STATUSTRANSACAO']._serialized_start=339
+  _globals['_STATUSTRANSACAO']._serialized_end=391
+  _globals['_CONTATOID']._serialized_start=393
+  _globals['_CONTATOID']._serialized_end=416
+  _globals['_CONTATOS']._serialized_start=418
+  _globals['_CONTATOS']._serialized_end=456
+  _globals['_TESTES']._serialized_start=459
+  _globals['_TESTES']._serialized_end=819
 # @@protoc_insertion_point(module_scope)

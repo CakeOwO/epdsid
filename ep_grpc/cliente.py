@@ -17,13 +17,29 @@ def ValorAbsolutoLong(valor):
     return stub.ValorAbsolutoLong(epdsid_pb2.Long(valor=valor))
 
 
-def SomaOitoLong(a, b, c, d, e, f, g, h):
-    return stub.SomaOitoLong(epdsid_pb2.OitoLong(a=a, b=b, c=c, d=d, e=e, f=f, g=g, h=h))
+def SomaListaLong(valores):
+    return stub.SomaListaLong(epdsid_pb2.ListaLong(valores=valores))
 
 
 def InverteString(texto):
     return stub.InverteString(epdsid_pb2.String(texto=texto))
 
 
-def ChamadaComplexo(id, nome, tags):
-    return stub.ChamadaComplexo(epdsid_pb2.SolicitacaoComplexo(id=id, nome=nome, tags=tags))
+def AdicionaContato(**contato):
+    return stub.AdicionaContato(epdsid_pb2.Contato(**contato))
+
+
+def PegaContato(id):
+    return stub.PegaContato(epdsid_pb2.ContatoId(id=id))
+
+
+def AtualizaContato(**contato):
+    return stub.AtualizaContato(epdsid_pb2.Contato(**contato))
+
+
+def RemoveContato(id):
+    return stub.RemoveContato(epdsid_pb2.ContatoId(id=id))
+
+
+def ListaContatos():
+    return stub.ListaContatos(epdsid_pb2.Vazio())

@@ -57,21 +57,6 @@ print("Desvio Padrão:\t", desvio)
 médias.append(média)
 desvios.append(desvio)
 
-func = c.InverteString
-texto_base = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" * 17
-for potencia in range(1, 11):
-    argumento = texto_base[:2**potencia]
-    for i in range(qtTestes):
-        arrTempos[i] = teste_desempenho(func, argumento)
-    dados = np.array(arrTempos)
-    média = dados.mean()
-    desvio = dados.std()
-    print(func.__name__ + f" (tamanho string {2**potencia})")
-    print("Tempo Médio:\t", média)
-    print("Desvio Padrão:\t", desvio)
-    médias.append(média)
-    desvios.append(desvio)
-
 func = c.ChamadaComplexo
 argumento = (1, "Ana", ["a", "b", "c"])
 for i in range(qtTestes):
@@ -85,25 +70,57 @@ print("Desvio Padrão:\t", desvio)
 médias.append(média)
 desvios.append(desvio)
 
+func = c.InverteString
+texto_base = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" * 16913
+potenciaMax = 20
+médiasString = []
+desviosString = []
+for potencia in range(1, potenciaMax + 1):
+    argumento = texto_base[:2**potencia]
+    for i in range(qtTestes):
+        arrTempos[i] = teste_desempenho(func, argumento)
+    dados = np.array(arrTempos)
+    média = dados.mean()
+    desvio = dados.std()
+    print(func.__name__ + f" (tamanho string {2**potencia})")
+    print("Tempo Médio:\t", média)
+    print("Desvio Padrão:\t", desvio)
+    médiasString.append(média)
+    desviosString.append(desvio)
+
 # matplotlib
-functions = [
-    "ChamadaVazio",
-    "ValorAbsolutoLong",
-    "SomaOitoLong",
-    "InvStr 2", "InvStr 4", "InvStr 8", "InvStr 16", "InvStr 32",
-    "InvStr 64", "InvStr 128", "InvStr 256", "InvStr 512", "InvStr 1024",
-    "ChamadaComplexo"
-]
+nomeFunc = ["ChamadaVazio", "ValorAbsolutoLong",
+            "SomaOitoLong", "ChamadaComplexo"]
 
-# Plot
-plt.figure(figsize=(12, 6))
-x = np.arange(len(functions))
+tamEntradaString = [f"{2**i}" for i in range(1, potenciaMax + 1)]
 
-plt.bar(x, médias, yerr=desvios, capsize=4, color='skyblue')
-plt.xticks(x, functions, rotation=45, ha='right')
-plt.ylabel("Tempo de Execução (segundos)")
-plt.title("Desempenho JSON-RPC (média e desvio padrão)")
-plt.tight_layout()
+médias_ms = [média * 1000 for média in médias]
+desvios_ms = [desvio * 1000 for desvio in desvios]
+
+# barras
+plt.figure(figsize=(19, 10))
+x = np.arange(len(nomeFunc))
+plt.bar(x, médias_ms, yerr=desvios_ms, capsize=4, color='skyblue')
+plt.xticks(x, nomeFunc, rotation=45, ha='right')
+plt.ylabel("Tempo de Execução (milisegundos)")
+plt.title("Desempenho gRPC (média e desvio padrão)")
 plt.grid(axis='y', linestyle='--', alpha=0.5)
 
+plt.show()
+
+médiasString_ms = [média * 1000 for média in médiasString]
+desviosString_ms = [desvio * 1000 for desvio in desviosString]
+sizes = [2**i for i in range(1, potenciaMax + 1)]
+
+# linha
+plt.figure(figsize=(19, 10))
+x = np.arange(len(tamEntradaString))
+plt.plot(x, médiasString_ms, marker='o', linestyle='-')
+plt.xticks(x, tamEntradaString, rotation=45, ha='right')
+plt.xlabel("Tamanho da String (caracteres)")
+plt.ylabel("Tempo de Execução (milisegundos)")
+plt.title("Desempenho InverteString vs Tamanho da String")
+plt.grid(True, linestyle='--', alpha=0.6)
+plt.fill_between(x, np.array(médiasString_ms) - np.array(desviosString_ms),
+                 np.array(médiasString_ms) + np.array(desviosString_ms), alpha=0.2)
 plt.show()

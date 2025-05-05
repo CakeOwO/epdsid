@@ -1,7 +1,7 @@
 from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
-from typing import ClassVar as _ClassVar, Iterable as _Iterable, Optional as _Optional
+from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Mapping, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
@@ -15,25 +15,11 @@ class Long(_message.Message):
     valor: int
     def __init__(self, valor: _Optional[int] = ...) -> None: ...
 
-class OitoLong(_message.Message):
-    __slots__ = ("a", "b", "c", "d", "e", "f", "g", "h")
-    A_FIELD_NUMBER: _ClassVar[int]
-    B_FIELD_NUMBER: _ClassVar[int]
-    C_FIELD_NUMBER: _ClassVar[int]
-    D_FIELD_NUMBER: _ClassVar[int]
-    E_FIELD_NUMBER: _ClassVar[int]
-    F_FIELD_NUMBER: _ClassVar[int]
-    G_FIELD_NUMBER: _ClassVar[int]
-    H_FIELD_NUMBER: _ClassVar[int]
-    a: int
-    b: int
-    c: int
-    d: int
-    e: int
-    f: int
-    g: int
-    h: int
-    def __init__(self, a: _Optional[int] = ..., b: _Optional[int] = ..., c: _Optional[int] = ..., d: _Optional[int] = ..., e: _Optional[int] = ..., f: _Optional[int] = ..., g: _Optional[int] = ..., h: _Optional[int] = ...) -> None: ...
+class ListaLong(_message.Message):
+    __slots__ = ("valores",)
+    VALORES_FIELD_NUMBER: _ClassVar[int]
+    valores: _containers.RepeatedScalarFieldContainer[int]
+    def __init__(self, valores: _Optional[_Iterable[int]] = ...) -> None: ...
 
 class String(_message.Message):
     __slots__ = ("texto",)
@@ -41,18 +27,53 @@ class String(_message.Message):
     texto: str
     def __init__(self, texto: _Optional[str] = ...) -> None: ...
 
-class SolicitacaoComplexo(_message.Message):
-    __slots__ = ("id", "nome", "tags")
+class Contato(_message.Message):
+    __slots__ = ("id", "nome", "email", "telefone", "rotulos", "endereco", "favorito")
+    class Endereco(_message.Message):
+        __slots__ = ("nomeendereco", "cidade", "estado", "cep", "pais")
+        NOMEENDERECO_FIELD_NUMBER: _ClassVar[int]
+        CIDADE_FIELD_NUMBER: _ClassVar[int]
+        ESTADO_FIELD_NUMBER: _ClassVar[int]
+        CEP_FIELD_NUMBER: _ClassVar[int]
+        PAIS_FIELD_NUMBER: _ClassVar[int]
+        nomeendereco: str
+        cidade: str
+        estado: str
+        cep: str
+        pais: str
+        def __init__(self, nomeendereco: _Optional[str] = ..., cidade: _Optional[str] = ..., estado: _Optional[str] = ..., cep: _Optional[str] = ..., pais: _Optional[str] = ...) -> None: ...
     ID_FIELD_NUMBER: _ClassVar[int]
     NOME_FIELD_NUMBER: _ClassVar[int]
-    TAGS_FIELD_NUMBER: _ClassVar[int]
+    EMAIL_FIELD_NUMBER: _ClassVar[int]
+    TELEFONE_FIELD_NUMBER: _ClassVar[int]
+    ROTULOS_FIELD_NUMBER: _ClassVar[int]
+    ENDERECO_FIELD_NUMBER: _ClassVar[int]
+    FAVORITO_FIELD_NUMBER: _ClassVar[int]
     id: int
     nome: str
-    tags: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, id: _Optional[int] = ..., nome: _Optional[str] = ..., tags: _Optional[_Iterable[str]] = ...) -> None: ...
+    email: str
+    telefone: str
+    rotulos: _containers.RepeatedScalarFieldContainer[str]
+    endereco: Contato.Endereco
+    favorito: bool
+    def __init__(self, id: _Optional[int] = ..., nome: _Optional[str] = ..., email: _Optional[str] = ..., telefone: _Optional[str] = ..., rotulos: _Optional[_Iterable[str]] = ..., endereco: _Optional[_Union[Contato.Endereco, _Mapping]] = ..., favorito: bool = ...) -> None: ...
 
-class RespostaComplexo(_message.Message):
-    __slots__ = ("status",)
+class StatusTransacao(_message.Message):
+    __slots__ = ("status", "msgstatus")
     STATUS_FIELD_NUMBER: _ClassVar[int]
-    status: str
-    def __init__(self, status: _Optional[str] = ...) -> None: ...
+    MSGSTATUS_FIELD_NUMBER: _ClassVar[int]
+    status: bool
+    msgstatus: str
+    def __init__(self, status: bool = ..., msgstatus: _Optional[str] = ...) -> None: ...
+
+class ContatoId(_message.Message):
+    __slots__ = ("id",)
+    ID_FIELD_NUMBER: _ClassVar[int]
+    id: int
+    def __init__(self, id: _Optional[int] = ...) -> None: ...
+
+class Contatos(_message.Message):
+    __slots__ = ("contatos",)
+    CONTATOS_FIELD_NUMBER: _ClassVar[int]
+    contatos: _containers.RepeatedCompositeFieldContainer[Contato]
+    def __init__(self, contatos: _Optional[_Iterable[_Union[Contato, _Mapping]]] = ...) -> None: ...
