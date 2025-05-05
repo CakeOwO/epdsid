@@ -5,7 +5,7 @@ import grpc
 import epdsid_pb2
 import epdsid_pb2_grpc
 
-channel = grpc.insecure_channel('https://studious-fortnight-7jvwv6qjv473wxvj-50051.app.github.dev/')
+channel = grpc.insecure_channel('localhost:50051')
 stub = epdsid_pb2_grpc.TestesStub(channel)
 
 print("ChamadaVazio:", stub.ChamadaVazio(epdsid_pb2.Vazio()))

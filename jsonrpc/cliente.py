@@ -1,6 +1,6 @@
 from jsonrpclib import Server
 
-server = Server("https://studious-fortnight-7jvwv6qjv473wxvj-8000.app.github.dev/")
+server = Server("http://localhost:8000")
 
 print("chamada_vazio:", server.chamada_vazio())
 print("valor_absoluto_long:", server.valor_absoluto_long(42))
