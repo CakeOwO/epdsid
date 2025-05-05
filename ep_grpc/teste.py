@@ -1,5 +1,6 @@
 from cliente import ChamadaVazio, ValorAbsolutoLong, SomaListaLong, InverteString, AdicionaContato, PegaContato, AtualizaContato, RemoveContato, ListaContatos
 
+
 def run():
     print("ChamadaVazio:", ChamadaVazio())
     print("ValorAbsolutoLong:", ValorAbsolutoLong(-336721962620426358))
@@ -53,6 +54,7 @@ def run():
     }))
     print("ListaContatos:", ListaContatos())
     print("RemoveContato:", RemoveContato(id=1))
+
 
 if __name__ == '__main__':
     run()

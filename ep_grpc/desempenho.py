@@ -311,14 +311,15 @@ plt.plot(x, médiasString_ms, marker='o', linestyle='-')
 plt.xticks(x, tamEntradaString, rotation=45, ha='right')
 plt.xlabel("Tamanho da String (caracteres)")
 plt.ylabel("Tempo de Execução (milisegundos)")
-plt.title("Desempenho InverteString vs Tamanho da String")
+plt.title("Desempenho InverteString vs Tamanho da String (gRPC)")
 plt.grid(True, linestyle='--', alpha=0.5)
 plt.fill_between(x, np.array(médiasString_ms) - np.array(desviosString_ms),
                  np.array(médiasString_ms) + np.array(desviosString_ms), alpha=0.2)
 plt.show()
 
-#barras CRUD
-nomeFuncCRUD = ["AdicionaContato", "PegaContato", "AtualizaContato", "RemoveContato"]
+# barras CRUD
+nomeFuncCRUD = ["AdicionaContato", "PegaContato",
+                "AtualizaContato", "RemoveContato"]
 
 médiasCRUD_ms = [média * 1000 for média in médiasCRUD]
 desviosCRUD_ms = [desvio * 1000 for desvio in desviosCRUD]
