@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+service Testes {
+  rpc ChamadaVazio (Vazio) returns (Vazio);
+  rpc ValorAbsolutoLong (Long) returns (Long);
+  rpc SomaOitoLong (OitoLong) returns (Long);
+  rpc InverteString (String) returns (String);
+  rpc ChamadaComplexo (SolicitacaoComplexo) returns (RespostaComplexo);
+}
+
+message Vazio {}
+
+message Long {
+  int64 valor = 1;
+}
+
+message OitoLong {
+  int64 a = 1;
+  int64 b = 2;
+  int64 c = 3;
+  int64 d = 4;
+  int64 e = 5;
+  int64 f = 6;
+  int64 g = 7;
+  int64 h = 8;
+}
+
+message String {
+  string texto = 1;
+}
+
+message SolicitacaoComplexo {
+  int64 id = 1;
+  string nome = 2;
+  repeated string tags = 3;
+}
+
+message RespostaComplexo {
+  string status = 1;
+}
