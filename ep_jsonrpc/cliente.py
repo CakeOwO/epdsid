@@ -1,7 +1,7 @@
-from jsonrpclib import Server
+from jsonrpclib import ServerProxy
 
-server = Server("http://localhost:8000")
-
+#server = ServerProxy("http://localhost:8000")
+server = ServerProxy("http://192.168.15.4:8000")
 
 def ChamadaVazio():
     return server.chamada_vazio()
@@ -11,8 +11,8 @@ def ValorAbsolutoLong(valor):
     return server.valor_absoluto_long(valor)
 
 
-def SomaListaLong(*valores):
-    return server.soma_lista_longs(*valores)
+def SomaListaLong(valores):
+    return server.soma_lista_long(*valores)
 
 
 def InverteString(texto):

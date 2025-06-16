@@ -5,7 +5,7 @@ import warnings
 
 import epdsid_pb2 as epdsid__pb2
 
-GRPC_GENERATED_VERSION = '1.71.0'
+GRPC_GENERATED_VERSION = '1.73.0'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -64,14 +64,14 @@ class TestesStub(object):
                 request_serializer=epdsid__pb2.ContatoId.SerializeToString,
                 response_deserializer=epdsid__pb2.Contato.FromString,
                 _registered_method=True)
-        self.RemoveContato = channel.unary_unary(
-                '/Testes/RemoveContato',
-                request_serializer=epdsid__pb2.ContatoId.SerializeToString,
-                response_deserializer=epdsid__pb2.StatusTransacao.FromString,
-                _registered_method=True)
         self.AtualizaContato = channel.unary_unary(
                 '/Testes/AtualizaContato',
                 request_serializer=epdsid__pb2.Contato.SerializeToString,
+                response_deserializer=epdsid__pb2.StatusTransacao.FromString,
+                _registered_method=True)
+        self.RemoveContato = channel.unary_unary(
+                '/Testes/RemoveContato',
+                request_serializer=epdsid__pb2.ContatoId.SerializeToString,
                 response_deserializer=epdsid__pb2.StatusTransacao.FromString,
                 _registered_method=True)
         self.ListaContatos = channel.unary_unary(
@@ -120,13 +120,13 @@ class TestesServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RemoveContato(self, request, context):
+    def AtualizaContato(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def AtualizaContato(self, request, context):
+    def RemoveContato(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -171,14 +171,14 @@ def add_TestesServicer_to_server(servicer, server):
                     request_deserializer=epdsid__pb2.ContatoId.FromString,
                     response_serializer=epdsid__pb2.Contato.SerializeToString,
             ),
-            'RemoveContato': grpc.unary_unary_rpc_method_handler(
-                    servicer.RemoveContato,
-                    request_deserializer=epdsid__pb2.ContatoId.FromString,
-                    response_serializer=epdsid__pb2.StatusTransacao.SerializeToString,
-            ),
             'AtualizaContato': grpc.unary_unary_rpc_method_handler(
                     servicer.AtualizaContato,
                     request_deserializer=epdsid__pb2.Contato.FromString,
+                    response_serializer=epdsid__pb2.StatusTransacao.SerializeToString,
+            ),
+            'RemoveContato': grpc.unary_unary_rpc_method_handler(
+                    servicer.RemoveContato,
+                    request_deserializer=epdsid__pb2.ContatoId.FromString,
                     response_serializer=epdsid__pb2.StatusTransacao.SerializeToString,
             ),
             'ListaContatos': grpc.unary_unary_rpc_method_handler(
@@ -360,33 +360,6 @@ class Testes(object):
             _registered_method=True)
 
     @staticmethod
-    def RemoveContato(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/Testes/RemoveContato',
-            epdsid__pb2.ContatoId.SerializeToString,
-            epdsid__pb2.StatusTransacao.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
     def AtualizaContato(request,
             target,
             options=(),
@@ -402,6 +375,33 @@ class Testes(object):
             target,
             '/Testes/AtualizaContato',
             epdsid__pb2.Contato.SerializeToString,
+            epdsid__pb2.StatusTransacao.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RemoveContato(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/Testes/RemoveContato',
+            epdsid__pb2.ContatoId.SerializeToString,
             epdsid__pb2.StatusTransacao.FromString,
             options,
             channel_credentials,

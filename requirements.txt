@@ -1,6 +1,5 @@
 grpcio
 grpcio-tools
-json-rpc
 jsonrpclib-pelix
 matplotlib
 numpy

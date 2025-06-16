@@ -1,6 +1,7 @@
 from jsonrpclib.SimpleJSONRPCServer import SimpleJSONRPCServer
 
-server = SimpleJSONRPCServer(("localhost", 8000))
+porta = 8000
+server = SimpleJSONRPCServer(("0.0.0.0", porta))
 
 contatos = {}
 
@@ -12,7 +13,7 @@ def valor_absoluto_long(valor):
     return abs(valor)
 
 
-def soma_lista_longs(valores):
+def soma_lista_long(*valores):
     return sum(valores)
 
 
@@ -48,7 +49,7 @@ def lista_contatos():
 
 server.register_function(chamada_vazio)
 server.register_function(valor_absoluto_long)
-server.register_function(soma_lista_longs)
+server.register_function(soma_lista_long)
 server.register_function(inverte_string)
 server.register_function(adiciona_contato)
 server.register_function(pega_contato)
@@ -56,5 +57,5 @@ server.register_function(atualiza_contato)
 server.register_function(remove_contato)
 server.register_function(lista_contatos)
 
-print("JSON-RPC server listening on port 8000...")
+print("JSON-RPC server listening on port ", porta, "...")
 server.serve_forever()

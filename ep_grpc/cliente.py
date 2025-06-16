@@ -1,11 +1,9 @@
-from time import perf_counter
-import numpy as np
-
 import grpc
 import epdsid_pb2
 import epdsid_pb2_grpc
 
-channel = grpc.insecure_channel('localhost:50051')
+#channel = grpc.insecure_channel('localhost:50051')
+channel = grpc.insecure_channel('192.168.15.4:50051')
 stub = epdsid_pb2_grpc.TestesStub(channel)
 
 

@@ -5,78 +5,74 @@ import cliente as c
 
 import matplotlib.pyplot as plt
 
-
-def teste_desempenho(funcao, *args, **kwargs):
-    começo = perf_counter()
-    resultado = funcao(*args, **kwargs)
-    término = perf_counter()
-    return término - começo
-
-
 qtTestes = 10
-arrTempos = [0] * qtTestes
+arrTempos = [0.0] * qtTestes
 médias = []
 desvios = []
 
-func = c.ChamadaVazio
+# Teste ChamadoVazio
 for i in range(qtTestes):
-    arrTempos[i] = teste_desempenho(func)
+    começo = perf_counter()
+    c.ChamadaVazio()
+    arrTempos[i] = perf_counter() - começo
+
 dados = np.array(arrTempos)
-média = dados.mean()
-desvio = dados.std()
-print(func.__name__)
-print("Tempo Médio:\t", média)
-print("Desvio Padrão:\t", desvio)
-médias.append(média)
-desvios.append(desvio)
+médias.append(dados.mean())
+desvios.append(dados.std())
+print("ChamadoVazio")
+print("Tempo Médio:\t", médias[-1])
+print("Desvio Padrão:\t", desvios[-1])
 
-argumento = [-6745436184021600282, 3213420826097711078, 8882416611680843605, 933260006861483163, 5337830554114930269, -
-             2327841631299803011, 3509734561335164606, 2376314678599160760, -5868783255512587062, -4665431211468056768]
+valores_long = [-6745436184021600282, 3213420826097711078, 8882416611680843605, 933260006861483163, 5337830554114930269, -
+                2327841631299803011, 3509734561335164606, 2376314678599160760, -5868783255512587062, -4665431211468056768]
 
-func = c.ValorAbsolutoLong
+# Teste ValorAbsolutoLong
 for i in range(qtTestes):
-    arrTempos[i] = teste_desempenho(func, argumento[i % len(argumento)])
-dados = np.array(arrTempos)
-média = dados.mean()
-desvio = dados.std()
-print(func.__name__)
-print("Tempo Médio:\t", média)
-print("Desvio Padrão:\t", desvio)
-médias.append(média)
-desvios.append(desvio)
+    argumento = valores_long[i % len(valores_long)]
+    começo = perf_counter()
+    c.ValorAbsolutoLong(argumento)
+    arrTempos[i] = perf_counter() - começo
 
-func = c.SomaListaLong
+dados = np.array(arrTempos)
+médias.append(dados.mean())
+desvios.append(dados.std())
+print("ValorAbsolutoLong")
+print("Tempo Médio:\t", médias[-1])
+print("Desvio Padrão:\t", desvios[-1])
+
+# Teste SomaListaLong
 for i in range(qtTestes):
     argumento = range(i, i+8)
-    arrTempos[i] = teste_desempenho(func, argumento)
+    começo = perf_counter()
+    c.SomaListaLong(argumento)
+    arrTempos[i] = perf_counter() - começo
+
 dados = np.array(arrTempos)
-média = dados.mean()
-desvio = dados.std()
-print(func.__name__)
-print("Tempo Médio:\t", média)
-print("Desvio Padrão:\t", desvio)
-médias.append(média)
-desvios.append(desvio)
+médias.append(dados.mean())
+desvios.append(dados.std())
+print("SomaListaLong")
+print("Tempo Médio:\t", médias[-1])
+print("Desvio Padrão:\t", desvios[-1])
 
 texto_base = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" * 16913
 potenciaMax = 20
 médiasString = []
 desviosString = []
 
-func = c.InverteString
+# Teste InverteString
 for potencia in range(1, potenciaMax + 1):
     argumento = texto_base[:2**potencia]
     for i in range(qtTestes):
-        arrTempos[i] = teste_desempenho(func, argumento)
+        começo = perf_counter()
+        c.InverteString(argumento)
+        arrTempos[i] = perf_counter() - começo
+    
     dados = np.array(arrTempos)
-    média = dados.mean()
-    desvio = dados.std()
-    print(func.__name__ + f" (tamanho string {2**potencia})")
-    print("Tempo Médio:\t", média)
-    print("Desvio Padrão:\t", desvio)
-    médiasString.append(média)
-    desviosString.append(desvio)
-
+    médiasString.append(dados.mean())
+    desviosString.append(dados.std())
+    print("InverteString" + f" (tamanho string {2**potencia})")
+    print("Tempo Médio:\t", médiasString[-1])
+    print("Desvio Padrão:\t", desviosString[-1])
 
 contatos = [
     {
@@ -234,56 +230,63 @@ contatos = [
 médiasCRUD = []
 desviosCRUD = []
 
-func = c.AdicionaContato
+# Teste AdicionaContato
 for i in range(qtTestes):
     argumento = contatos[i % len(contatos)]
-    arrTempos[i] = teste_desempenho(func, **argumento)
-dados = np.array(arrTempos)
-média = dados.mean()
-desvio = dados.std()
-print(func.__name__)
-print("Tempo Médio:\t", média)
-print("Desvio Padrão:\t", desvio)
-médiasCRUD.append(média)
-desviosCRUD.append(desvio)
+    argumento["id"] = i + 1
+    começo = perf_counter()
+    c.AdicionaContato(**argumento)
+    arrTempos[i] = perf_counter() - começo
 
-func = c.PegaContato
+dados = np.array(arrTempos)
+médiasCRUD.append(dados.mean())
+desviosCRUD.append(dados.std())
+print("AdicionaContato")
+print("Tempo Médio:\t", médiasCRUD[-1])
+print("Desvio Padrão:\t", desviosCRUD[-1])
+
+# Teste PegaContato
 for i in range(qtTestes):
-    arrTempos[i] = teste_desempenho(func, i+1)
-dados = np.array(arrTempos)
-média = dados.mean()
-desvio = dados.std()
-print(func.__name__)
-print("Tempo Médio:\t", média)
-print("Desvio Padrão:\t", desvio)
-médiasCRUD.append(média)
-desviosCRUD.append(desvio)
+    argumento = i + 1
+    começo = perf_counter()
+    c.PegaContato(argumento)
+    arrTempos[i] = perf_counter() - começo
 
-func = c.AtualizaContato
+dados = np.array(arrTempos)
+médiasCRUD.append(dados.mean())
+desviosCRUD.append(dados.std())
+print("PegaContato")
+print("Tempo Médio:\t", médiasCRUD[-1])
+print("Desvio Padrão:\t", desviosCRUD[-1])
+
+# Teste AtualizaContato
 for i in range(qtTestes):
     argumento = contatos[i % len(contatos)]
     argumento["id"] = i
-    arrTempos[i] = teste_desempenho(func, **argumento)
-dados = np.array(arrTempos)
-média = dados.mean()
-desvio = dados.std()
-print(func.__name__)
-print("Tempo Médio:\t", média)
-print("Desvio Padrão:\t", desvio)
-médiasCRUD.append(média)
-desviosCRUD.append(desvio)
+    começo = perf_counter()
+    c.AtualizaContato(**argumento)
+    arrTempos[i] = perf_counter() - começo
 
-func = c.RemoveContato
-for i in range(qtTestes):
-    arrTempos[i] = teste_desempenho(func, i)
 dados = np.array(arrTempos)
-média = dados.mean()
-desvio = dados.std()
-print(func.__name__)
-print("Tempo Médio:\t", média)
-print("Desvio Padrão:\t", desvio)
-médiasCRUD.append(média)
-desviosCRUD.append(desvio)
+médiasCRUD.append(dados.mean())
+desviosCRUD.append(dados.std())
+print("AtualizaContato")
+print("Tempo Médio:\t", médiasCRUD[-1])
+print("Desvio Padrão:\t", desviosCRUD[-1])
+
+# Teste RemoveContato
+for i in range(qtTestes):
+    argumento = i
+    começo = perf_counter()
+    c.RemoveContato(argumento)
+    arrTempos[i] = perf_counter() - começo
+
+dados = np.array(arrTempos)
+médiasCRUD.append(dados.mean())
+desviosCRUD.append(dados.std())
+print("RemoveContato")
+print("Tempo Médio:\t", médiasCRUD[-1])
+print("Desvio Padrão:\t", desviosCRUD[-1])
 
 # matplotlib
 
@@ -293,12 +296,13 @@ desvios_ms = [desvio * 1000 for desvio in desvios]
 
 # barras
 x = np.arange(len(nomeFunc))
+plt.figure(figsize=(8,6),dpi=150)
 plt.bar(x, médias_ms, yerr=desvios_ms, capsize=4)
 plt.xticks(x, nomeFunc, rotation=45, ha='right')
 plt.ylabel("Tempo de Execução (milisegundos)")
 plt.title("Desempenho gRPC (média e desvio padrão)")
 plt.grid(axis='y', linestyle='--', alpha=0.5)
-
+plt.tight_layout()
 plt.show()
 
 tamEntradaString = [f"{2**i}" for i in range(1, potenciaMax + 1)]
@@ -307,6 +311,7 @@ desviosString_ms = [desvio * 1000 for desvio in desviosString]
 
 # linha
 x = np.arange(len(tamEntradaString))
+plt.figure(figsize=(8,6),dpi=150)
 plt.plot(x, médiasString_ms, marker='o', linestyle='-')
 plt.xticks(x, tamEntradaString, rotation=45, ha='right')
 plt.xlabel("Tamanho da String (caracteres)")
@@ -315,6 +320,7 @@ plt.title("Desempenho InverteString vs Tamanho da String (gRPC)")
 plt.grid(True, linestyle='--', alpha=0.5)
 plt.fill_between(x, np.array(médiasString_ms) - np.array(desviosString_ms),
                  np.array(médiasString_ms) + np.array(desviosString_ms), alpha=0.2)
+plt.tight_layout()
 plt.show()
 
 # barras CRUD
@@ -326,10 +332,11 @@ desviosCRUD_ms = [desvio * 1000 for desvio in desviosCRUD]
 
 # barras
 x = np.arange(len(nomeFuncCRUD))
+plt.figure(figsize=(8,6),dpi=150)
 plt.bar(x, médiasCRUD_ms, yerr=desviosCRUD_ms, capsize=4)
 plt.xticks(x, nomeFuncCRUD, rotation=45, ha='right')
 plt.ylabel("Tempo de Execução (milisegundos)")
 plt.title("Desempenho CRUD gRPC (média e desvio padrão)")
 plt.grid(axis='y', linestyle='--', alpha=0.5)
-
+plt.tight_layout()
 plt.show()
